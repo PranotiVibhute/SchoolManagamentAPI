@@ -25,7 +25,7 @@ namespace WebApiAssiment3.Service
         {
             var obj = new Teacher()
             {
-                TeacherId = teacher.TeacherId,
+                
                 FirstName = teacher.FirstName,
                 LastName = teacher.LastName,
                 SubjectId = teacher.SubjectId,
@@ -34,9 +34,23 @@ namespace WebApiAssiment3.Service
             var result = await _dbContext.SaveChangesAsync();
             return result >= 0 ? obj : null;
         }
+        public async Task<Teacher?> UpdateTeacher(int id, Teacher teacher)
+        {
+            var obj = await _dbContext.Teachers.FirstOrDefaultAsync(index => index.TeacherId == id);
+            if (obj != null)
+            {
+                obj.FirstName = teacher.FirstName;
+                obj.LastName = teacher.LastName;
+                obj.SubjectId = teacher.SubjectId;
+
+                var result = await _dbContext.SaveChangesAsync();
+                return result >= 0 ? obj : null;
+            }
+            return null;
+        }
         public async Task<bool> removeTeacher(int id)
         {
-            var obj=await _dbContext.Teachers.FirstOrDefaultAsync(obj=>obj.TeacherId==id);
+            var obj = await _dbContext.Teachers.FirstOrDefaultAsync(obj => obj.TeacherId == id);
             if (obj == null)
             {
                 return false;
