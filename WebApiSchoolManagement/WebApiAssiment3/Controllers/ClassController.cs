@@ -42,6 +42,21 @@ namespace WebApiAssiment3.Controllers
             return Ok(obj);
 
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateClass(int id, Class @class)
+        {
+            if (id != @class.ClassId)
+            {
+                return NotFound("Id is mismatch");
+            }
+            var cls = await _classService.UpdateClass(id, @class);
+            if (cls == null)
+            {
+                return NotFound("Id is Not Found");
+            }
+            return Ok(cls);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(int id)
         {
