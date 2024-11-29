@@ -34,6 +34,17 @@ namespace WebApiAssiment3.Service
             var cls = await _dbContext.SaveChangesAsync();
             return cls >= 0 ? obj:null;
         }
+        public async Task<Class?> UpdateClass(int id, Class @class)
+        {
+            var cls = await _dbContext.Classes.FirstOrDefaultAsync(index => index.ClassId == id);
+            if (cls != null)
+            {
+                cls.ClassName = @class.ClassName;
+                cls.TeacherId = @class.TeacherId;
+            }
+            var result = await _dbContext.SaveChangesAsync();
+            return result >= 0 ? cls:null;
+        }
         public async Task<bool> DeleteByid(int id)
         {
             var obj=await _dbContext.Classes.FirstOrDefaultAsync(obj=>obj.ClassId==id);
