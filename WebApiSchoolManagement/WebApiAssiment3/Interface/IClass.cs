@@ -7,6 +7,7 @@ namespace WebApiAssiment3.Interface
         Task<List<Class>> GetAllClasses();
         Task<Class?>GetClassById(int id);
         Task<Class?> AddClass(Class @class);
+        Task<Class?> UpdateClass(int id,Class @class);
         Task<bool>DeleteByid(int id);
     }
 }
