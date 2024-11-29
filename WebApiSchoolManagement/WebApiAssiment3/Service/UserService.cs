@@ -42,8 +42,8 @@ namespace WebApiAssiment3.Service
                 obj.UserName = updateUser.UserName;
                 obj.PasswordHash = updateUser.PasswordHash;
                 obj.Role = updateUser.Role;
-            };
-            _dbContext.Users.Update(updateUser);
+            }
+            
             var result = await _dbContext.SaveChangesAsync();
             return result >= 0 ? obj : null;
         }
